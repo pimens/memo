@@ -120,7 +120,7 @@ class M_ad extends CI_model
 		$nama = $data['nama'];
 		$unit = $data['unit'];
 		$h= $data['harga'];
-		$t = $data['total'];
+		$t = $data['satuan'];
 		$k = $data['ket'];
 		$id = $data['id'];
 		return $this->db->query("insert into barang
@@ -135,11 +135,11 @@ class M_ad extends CI_model
 		$nama = $data['nama'];
 		$unit = $data['unit'];
 		$h= $data['harga'];
-		$t = $data['total'];
+		$t = $data['satuan'];
 		$k = $data['ket'];
 		$id = $data['id'];
 		return $this->db->query("update barang set nama_barang='$nama', 
-	unit='$unit', harga='$h',total='$t',keterangan='$k' where id=$id");
+	unit='$unit', harga='$h',satuan='$t',keterangan='$k' where id=$id");
 	}
 	public function deleteBarang($id)
 	{

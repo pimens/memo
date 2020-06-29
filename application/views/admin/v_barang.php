@@ -17,13 +17,13 @@
                                     <input type="text" name='nama' class="form-control" placeholder="Enter nama barang" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name='unit' class="form-control" placeholder="Enter unit" required="required">
+                                    <input type="text" name='unit' class="form-control" placeholder="Enter Jumlah" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name='total' class="form-control" placeholder="Enter Satuan" required="required">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name='harga' class="form-control" placeholder="Enter harga">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name='total' class="form-control" placeholder="Enter total" required="required">
                                 </div>
                                 <div class="form-group">
                                     <textarea name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea>
@@ -126,13 +126,15 @@
                                             $total = 0;
                                             foreach ($barang as $c) {
                                                 $i++;
-                                                $total = $total + $c->total;
+                                                $j=0;
+                                                $j=$c->unit*$c->harga;
+                                                $total = $total + $j;
                                                 echo "<tr>
                                             <td>$i</td>										
                                             <td>$c->nama_barang</td>										
-                                        	<td>$c->unit</td>			
+                                        	<td>$c->unit/$c->satuan</td>			
                                             <td>$c->harga</td>		
-                                            <td>$c->total</td>		
+                                            <td>$j</td>		
                                             <td>$c->keterangan</td>		
                                             <td>";
                                                 if ($permohonan->status == 0) {

@@ -14,7 +14,7 @@ class Ad extends CI_Controller
 		$data['permohonan'] = $this->M_ad->getDataByUserJenis(0);
 		$data['barang'] = $this->M_ad->getDataByUserJenis(1);
 		$data['user'] = $this->M_ad->userLevel();
-		$data['title'] = 'Beranda Adminnn';
+		$data['title'] = 'Beranda';
 		$this->load->view('admin/routing', $data);
 		$this->load->view('admin/v_head', $data);
 		$this->load->view('admin/v_sidebar');
@@ -154,7 +154,7 @@ class Ad extends CI_Controller
 		$data['unit'] = $this->input->post('unit');
 		$data['ket'] = $this->input->post('keterangan');
 		$data['harga'] = $this->input->post('harga');
-		$data['total'] = $this->input->post('total');
+		$data['satuan'] = $this->input->post('total');
 		$data['id'] = $this->input->post('id');
 		$this->M_ad->insertBarang($data);
 		$this->session->set_flashdata('notif', '<div id="success-alert" class="alert alert-success alert-dismissable">
@@ -178,7 +178,7 @@ class Ad extends CI_Controller
 		$data['unit'] = $this->input->post('unit');
 		$data['ket'] = $this->input->post('keterangan');
 		$data['harga'] = $this->input->post('harga');
-		$data['total'] = $this->input->post('total');
+		$data['satuan'] = $this->input->post('total');
 		$data['id'] = $this->input->post('id');
 		$data['permohonan'] = $this->input->post('permohonan');
 		$this->M_ad->editBarang($data);
@@ -407,9 +407,11 @@ class Ad extends CI_Controller
 		$total = 0;
 		$this->load->helper('csv');
 		foreach ($q as $row) {
-			$total = $total + $row->total;
+			$j=0;
+			$j=$row->unit*$row->harga;
+			$total = $total + $j;
 			$data[++$i] = array('', '', '', $in, $row->nama_barang, $row->unit, $row->harga, 
-			$row->total, $row->keterangan);
+			$j, $row->keterangan);
 			$in++;
 		}
 		$data[++$i] = array('', '', '', '','', 'Total', $total);

@@ -22,7 +22,7 @@
                                     <input value="<?php echo $barang->harga; ?>" type="text" name='harga' class="form-control" placeholder="Enter Fee">
                                 </div>
                                 <div class="form-group">
-                                    <input value="<?php echo $barang->total; ?>" type="text" name='total' class="form-control" placeholder="Enter Nomor Rekening">
+                                    <input value="<?php echo $barang->satuan; ?>" type="text" name='total' class="form-control" placeholder="Enter Nomor Rekening">
                                 </div>
                                 <div class="form-group">
                                     <input value="<?php echo $barang->keterangan; ?>" type="text" name='keterangan' class="form-control" placeholder="Enter Nama Bendahara">
