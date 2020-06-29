@@ -37,6 +37,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                <select name="jenis" id="input" class="form-control">
+                                        <option value='0'>-- Jenis Memo --</option>
+                                        <option value='0'>Memo</option>
+                                        <option value='1'>Barang</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" name='tanggal' class="form-control" id="name" placeholder="Enter Tanggal">
                                 </div>
                                 <div class="form-group">
@@ -147,6 +155,99 @@
                         </div>
 
                     </div> <!-- kolom 6 end -->
+
+                    <div class="col-md-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Daftar Permohonan Barang yang diajukan</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="table-responsive">
+                                    <table id="tabelBarang" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>--</th>
+                                                <th>Nomor</th>
+                                                <th>Kepada</th>
+                                                <th>Direktur</th>
+                                                <th>Tanggal</th>
+                                                <th>Perihal</th>
+                                                <th>Deskripsi</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $u = base_url();
+                                            foreach ($barang as $c) {
+                                                if ($c->status == 0) {
+                                                    echo "
+                                                <td><p><span class='label label-success'>Pending</span></p></td>
+                                                ";
+                                                } else if ($c->status == 1) {
+                                                    echo "
+                                                <td><p><span class='label label-warning'>Approve X</span></p></td>
+                                                ";
+                                                } else if ($c->status == 2) {
+                                                    echo "
+                                                <td><p><span class='label label-primary'>Approve XX</span></p></td>
+                                                ";
+                                                } else if ($c->status == 3) {
+                                                    echo "
+                                                <td><p><span class='label label-danger'>Rejected X</span></p>
+                                                $c->komentar
+                                                </td>
+                                                ";
+                                                } else {
+                                                    echo "
+                                                <td><p><span class='label label-danger'>Rejected XX</span></p>
+                                                $c->komentar
+                                                </td>
+                                                ";
+                                                }
+                                                echo "<td>$c->nomor</td>										
+                                            <td>$c->kepada</td>	
+											<td>$c->direktur</td>			                                            		
+                                            <td>$c->tanggal</td>		
+                                            <td>$c->hal</td>		
+                                            <td>$c->deskripsi</td>		
+                                            <td>";
+                                                echo "<a class='btn btn-info btn-sm' href='" . $u . "ad/barang/$c->id'><span class='glyphicon glyphicon-plus'></span></a>";
+                                                if ($c->status == 0) {
+                                                    echo "<a class='btn btn-primary btn-sm' href='$u/ad/editPermohonan/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                                    echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
+                                                }
+                                                echo "</td>
+                                            </tr>";
+                                            }
+                                            ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>--</th>
+                                                <th>Nomor</th>
+                                                <th>Kepada</th>
+                                                <th>Direktur</th>
+                                                <th>Tanggal</th>
+                                                <th>Perihal</th>
+                                                <th>Deskripsi</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- kolom 6 end -->
                 </div> <!-- row end -->
 
             </div>
@@ -159,6 +260,8 @@
 <script type="text/javascript">
     $(function() {
         $('#tabelMemo').dataTable();
+        $('#tabelBarang').dataTable();
+
     });
 </script>
 <script>

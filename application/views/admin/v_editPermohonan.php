@@ -43,6 +43,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <select name="jenis" id="input" class="form-control">
+                                        <option value='0'>-- Jenis Memo --</option>
+                                        <option value='0' <?php if ($permohonan->jenis == 0) {
+                                                                echo "selected";
+                                                            } ?>>Memo</option>
+                                        <option value='1' <?php if ($permohonan->jenis == 1) {
+                                                                echo "selected";
+                                                            } ?>>Barang</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <input type="text" name='tanggal' value="<?php echo $permohonan->tanggal; ?>" required="required" class="form-control" id="name" placeholder="Enter Tanggal">
                                 </div>
                                 <div class="form-group">

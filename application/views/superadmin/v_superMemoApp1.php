@@ -31,6 +31,7 @@
                                     <table id="tabelMemo" class="table table-striped table-bordered table-responsive tabelKomentar">
                                         <thead>
                                             <tr>
+                                                <th>Jenis</th>
                                                 <th>--</th>
                                                 <th>Nomor</th>
                                                 <th>Dari</th>
@@ -46,6 +47,11 @@
                                             <?php
                                             foreach ($permohonan as $c) {
                                                 echo "<tr>";
+                                                if($c->jenis==0){
+                                                    echo "<td>Memo</td></td>";
+                                                }else{
+                                                    echo "<td>Barang</td>";
+                                                }
                                                 if ($c->status == 0) {
                                                     echo "
                                                 <td><p><span class='label label-success'>Pending</span></p></td>
@@ -79,8 +85,14 @@
                                             <td>$c->hal</td>		
                                             <td>$c->deskripsi</td>		
                                             <td>";
+                                            if($c->jenis==0){
                                                 echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
                                                     "ad/detailMemo3/$c->id'><i class='fa fa-eye'></i></a>";
+                                            }else{
+                                                echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
+                                                "ad/detailBarang3/$c->id'><i class='fa fa-eye'></i></a>";
+                                            }
+                                                
                                                 echo "</td>
                                             </tr>";
                                             }
@@ -88,6 +100,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>Jenis</th>
                                                 <th>--</th>
                                                 <th>Nomor</th>
                                                 <th>Dari</th>
