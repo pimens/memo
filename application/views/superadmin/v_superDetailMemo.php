@@ -86,8 +86,10 @@
                                         <tbody>
                                             <?php
                                             $i = 0;
+                                            $total = 0;
                                             foreach ($memo as $c) {
                                                 $i++;
+                                                $total = $total + $c->setoran;
                                                 echo "<tr>
                                             <td>$i</td>										
                                             <td>$c->desa</td>										
@@ -110,6 +112,9 @@
                                             </tr>
                                         </tfoot>
                                     </table>
+                                    <?php
+                                    echo "Total Setoran : " . $total;
+                                    ?>
                                 </div>
                             </div>
                         </div>
