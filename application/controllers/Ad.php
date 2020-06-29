@@ -232,6 +232,7 @@ class Ad extends CI_Controller
 		$data['nama'] = $this->input->post('nama');
 		$data['jabatan'] = $this->input->post('jabatan');
 		$data['password'] = $this->input->post('password');
+		$data['lama'] = $this->input->post('lama');
 		$this->M_ad->editUser($data);
 		$this->session->set_flashdata('notif', '<div id="success-alert" class="alert alert-success alert-dismissable">
 	                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

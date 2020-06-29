@@ -72,7 +72,7 @@
                                     echo "
                                     <span class='label label-primary'>Approve XX</span>
                                     ";
-                                    echo "<a class='btn btn-primary btn-sm' href='$u/ad/report/$permohonan->id'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                     echo "<a class='label label-primary' href='$u/ad/report/$permohonan->id'>Report</a>";
                                 } else if ($permohonan->status == 3) {
                                     echo "
                                     <span class='label label-danger'>Rejected X</span>
@@ -135,8 +135,13 @@
                                             <td>$c->norekening</td>		
                                             <td>$c->bendahara</td>		
                                             <td>";
-                                                echo "<a class='btn btn-primary btn-sm' href='$u/ad/editMemo/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                                echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
+                                                if ($permohonan->status == 0) {
+                                                    echo "<a class='btn btn-primary btn-sm' href='$u/ad/editMemo/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
+                                                    echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
+                                                }else{
+                                                    echo "-";
+                                                }
+
                                                 echo "</td>
                                             </tr>";
                                             }
@@ -156,7 +161,7 @@
                                     </table>
                                 </div>
                                 <?php
-                                echo "Total Setoran : ".$total;
+                                echo "Total Setoran : " . $total;
                                 ?>
                             </div>
                         </div>

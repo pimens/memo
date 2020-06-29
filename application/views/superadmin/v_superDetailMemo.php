@@ -40,6 +40,7 @@
                                     echo "
                                     <span class='label label-primary'>Approve XX</span>
                                     ";
+                                     echo "<a class='label label-primary' href='$u/ad/report/$permohonan->id'>Report</a>";
                                 } else if ($permohonan->status == 3) {
                                     echo "
                                     <span class='label label-danger'>Rejected X</span>

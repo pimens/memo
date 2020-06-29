@@ -17,7 +17,10 @@
                                     <input value="<?php echo $user->jabatan; ?>" type="text" name='jabatan' class="form-control" placeholder="Enter Jabatan">
                                 </div>
                                 <div class="form-group">
-                                    <input value="<?php echo $user->password; ?>" type="text" name='password' class="form-control" placeholder="Enter New Password">
+                                    <input value="Password Baru" type="text" name='password' class="form-control" placeholder="Enter New Password">
+                                </div>
+                                <div class="form-group">
+                                    <input value="<?php echo $user->password; ?>" type="hidden" name='lama' class="form-control" placeholder="Enter New Password">
                                 </div>
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>

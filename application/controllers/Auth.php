@@ -20,7 +20,7 @@
 		{
 			$nama = $this->input->post('nama');
 			$pass = $this->input->post('pass');
-			// $pass = md5($pass);
+			$pass = md5($pass);
 			$result = $this->ModelAuth->cekLogin($nama, $pass);
 			if($result) {
 				$sess_array = array();
