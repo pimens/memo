@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2020 at 05:02 AM
+-- Generation Time: Jun 29, 2020 at 10:11 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `memo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `barang`
+--
+
+CREATE TABLE `barang` (
+  `id` int(11) NOT NULL,
+  `permohonan` int(11) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `unit` varchar(20) DEFAULT NULL,
+  `harga` int(11) DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `keterangan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `barang`
+--
+
+INSERT INTO `barang` (`id`, `permohonan`, `nama_barang`, `unit`, `harga`, `total`, `keterangan`) VALUES
+(1, 21, 'abc', '2 unit', 6000, 12000, 'qqqqqqq'),
+(2, 21, 'kipas', '4 pcs', 5000, 20000, 'keteranganaaaaaaaXXXX'),
+(3, 18, 'ada', '2 pcs', 9000, 18000, 'keteranganXXXXXX');
 
 -- --------------------------------------------------------
 
@@ -44,10 +69,10 @@ CREATE TABLE `memo` (
 
 INSERT INTO `memo` (`id`, `permohonan`, `desa`, `setoran`, `fee`, `norekening`, `bendahara`) VALUES
 (1, 3, 'Kekalik', '7000', '3000', '1234', 'Faris'),
-(2, 3, 'Jelojokkk', '10000', '5000', '4567', 'FatirArsalan'),
-(3, 3, 'Swadaya', '9000', '4000', '180', 'Sulistyo'),
 (13, 11, 'Jelojokkk', '5999', '3000', '4567', 'FatirArsalanaa'),
-(14, 13, 'Keruak', '60000', '5000', '345', 'Azis gagap');
+(14, 13, 'Keruak', '60000', '5000', '345', 'Azis gagap'),
+(15, 19, 'Jelojokkk', '5999', '3000', '233', 'FatirArsalan'),
+(17, 10, 'Kekalik', '7000', '3000', '4567', 'Faris');
 
 -- --------------------------------------------------------
 
@@ -65,20 +90,23 @@ CREATE TABLE `permohonan` (
   `hal` text DEFAULT NULL,
   `deskripsi` text DEFAULT NULL,
   `status` int(11) NOT NULL,
-  `komentar` text NOT NULL
+  `komentar` text NOT NULL,
+  `jenis` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `permohonan`
 --
 
-INSERT INTO `permohonan` (`id`, `nomor`, `kepada`, `direktur`, `dari`, `tanggal`, `hal`, `deskripsi`, `status`, `komentar`) VALUES
-(3, '3434', 4, 5, 9, '2019-12-04', 'duit', 'Loteng', 2, ''),
-(10, 'adassssssss', 4, 5, 1, '2019-12-03', 'adas', 'asdas', 0, 'cc'),
-(11, '1212/BDNR', 2, 5, 1, '2019-12-04', 'Hal apaaaaaadsadasasd', 'Deskripsi apaasdsadsad', 2, 'masih tidak jelas'),
-(13, '45/xxxxxxxxxxxxxxxxxxxxyyyy', 2, 5, 1, '2019-03-04', 'Abc', 'aaa', 0, 'Komentarasdassa'),
-(17, 'asas', 4, 5, 1, '2019-12-09', 'as', 'asda', 0, ''),
-(18, 'sadsaghhfjg', 2, 3, 1, '2019-12-04', 'sadsa', 'asdasda', 3, 'Komentarasdasdsa');
+INSERT INTO `permohonan` (`id`, `nomor`, `kepada`, `direktur`, `dari`, `tanggal`, `hal`, `deskripsi`, `status`, `komentar`, `jenis`) VALUES
+(3, '3434', 4, 5, 9, '2019-12-04', 'duit', 'Loteng', 2, '', 0),
+(10, '345/bpr/lotim', 4, 5, 1, '2019-12-03', 'adas', 'asdas', 0, 'cc', 0),
+(11, '1212/BDNR', 2, 5, 1, '2019-12-04', 'Hal apaaaaaadsadasasd', 'Deskripsi apaasdsadsad', 1, 'saas', 0),
+(13, '45/xxxxxxxxxxxxxxxxxxxxyyyy', 2, 5, 1, '2019-03-04', 'Abc', 'aaa', 2, 'KomentarXXXXXXXX', 0),
+(17, 'asas', 4, 5, 1, '2019-12-09', 'as', 'asda', 0, '', 0),
+(18, 'COba', 2, 3, 1, '2019-12-04', 'sadsa', 'asdasda', 3, 'Komentaradasd', 1),
+(19, '454/adad', 4, 5, 9, '2019-12-03', 'membaut', 'adasd', 2, 'fasasd', 1),
+(21, '5644', 2, 5, 1, '2019-03-04', 'asd', 'asd', 2, 'Komentardsfdsf', 1);
 
 -- --------------------------------------------------------
 
@@ -99,17 +127,25 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `jabatan`, `level`, `password`) VALUES
-(1, 'iman', 'auditor', 1, 'iman'),
-(2, 'sp', 'supervisor', 2, 'sp'),
+(1, 'imanaja', 'auditor', 1, '5be9a68073f66a56554e25614e9f1c9a'),
+(2, 'sp', 'supervisor', 2, '1952a01898073d1e561b9b4f2e42cbd7'),
 (3, 'diektur it', 'direktur it', 3, 'xx'),
-(4, 'kacab', 'kacab', 2, 'kacab'),
-(5, 'dir', 'direktru', 3, 'dir'),
-(6, 'superadmin', 'admin', 0, 'super'),
-(9, 'fff', 'ff', 1, 'f');
+(4, 'kacab', 'kacabbs', 2, 'cf2e3e5791b0561920fdaaa8067acb13'),
+(5, 'dir', 'direktru', 3, '736007832d2167baaae763fd3a3f3cf1'),
+(6, 'superadmin', 'admin', 0, '1b3231655cebb7a1f783eddf27d254ca'),
+(9, 'eko', 'ff', 1, 'e5ea9b6d71086dfef3a15f726abcc5bf'),
+(10, 'faris', 'jjj', 1, '3f9e03a0d7508196ad935ec6f1bb9eb2');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `barang`
+--
+ALTER TABLE `barang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permohonan` (`permohonan`);
 
 --
 -- Indexes for table `memo`
@@ -138,26 +174,38 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `barang`
+--
+ALTER TABLE `barang`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `memo`
 --
 ALTER TABLE `memo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `permohonan`
 --
 ALTER TABLE `permohonan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `barang`
+--
+ALTER TABLE `barang`
+  ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`permohonan`) REFERENCES `permohonan` (`id`);
 
 --
 -- Constraints for table `memo`
