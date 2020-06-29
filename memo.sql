@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2020 at 10:11 AM
+-- Generation Time: Jun 29, 2020 at 01:23 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -34,7 +34,7 @@ CREATE TABLE `barang` (
   `nama_barang` varchar(100) NOT NULL,
   `unit` varchar(20) DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
-  `total` double DEFAULT NULL,
+  `satuan` varchar(20) DEFAULT NULL,
   `keterangan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,10 +42,10 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `permohonan`, `nama_barang`, `unit`, `harga`, `total`, `keterangan`) VALUES
-(1, 21, 'abc', '2 unit', 6000, 12000, 'qqqqqqq'),
-(2, 21, 'kipas', '4 pcs', 5000, 20000, 'keteranganaaaaaaaXXXX'),
-(3, 18, 'ada', '2 pcs', 9000, 18000, 'keteranganXXXXXX');
+INSERT INTO `barang` (`id`, `permohonan`, `nama_barang`, `unit`, `harga`, `satuan`, `keterangan`) VALUES
+(1, 21, 'abc', '2', 6000, 'unit', 'qqqqqqq'),
+(2, 21, 'kipas', '4', 5000, 'buah', 'keteranganaaaaaaaXXXX'),
+(3, 18, 'ada', '2', 9000, 'pcs', 'keteranganXXXXXX');
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,8 @@ INSERT INTO `permohonan` (`id`, `nomor`, `kepada`, `direktur`, `dari`, `tanggal`
 (17, 'asas', 4, 5, 1, '2019-12-09', 'as', 'asda', 0, '', 0),
 (18, 'COba', 2, 3, 1, '2019-12-04', 'sadsa', 'asdasda', 3, 'Komentaradasd', 1),
 (19, '454/adad', 4, 5, 9, '2019-12-03', 'membaut', 'adasd', 2, 'fasasd', 1),
-(21, '5644', 2, 5, 1, '2019-03-04', 'asd', 'asd', 2, 'Komentardsfdsf', 1);
+(21, '5644', 2, 5, 1, '2019-03-04', 'asd', 'asd', 2, 'Komentardsfdsf', 1),
+(22, 'sss', 2, 5, 1, '2019-12-03', 'x', 's', 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `memo`
@@ -189,7 +190,7 @@ ALTER TABLE `memo`
 -- AUTO_INCREMENT for table `permohonan`
 --
 ALTER TABLE `permohonan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user`

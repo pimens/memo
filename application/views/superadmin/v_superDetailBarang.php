@@ -90,13 +90,15 @@
                                             $total = 0;
                                             foreach ($barang as $c) {
                                                 $i++;
-                                                $total = $total + $c->total;
+                                                $j=0;
+                                                $j=$c->unit*$c->harga;
+                                                $total = $total + $j;
                                                 echo "<tr>
                                             <td>$i</td>										
                                             <td>$c->nama_barang</td>										
-                                        	<td>$c->unit</td>			
+                                        	<td>$c->unit/$c->satuan</td>			
                                             <td>$c->harga</td>		
-                                            <td>$c->total</td>		
+                                            <td>$j</td>		
                                             <td>$c->keterangan</td></tr>";
                                             }
                                             ?>
