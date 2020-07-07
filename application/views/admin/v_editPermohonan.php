@@ -61,7 +61,7 @@
                                     <textarea name="hal" class="form-control" rows="3" required="required"><?php echo $permohonan->hal; ?></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="deskripsi" id="inputdeskripsi" class="form-control" rows="3" required="required"><?php echo $permohonan->deskripsi; ?></textarea>
+                                    <textarea name="deskripsi" id="editor1" class="form-control" rows="3" required="required"><?php echo $permohonan->deskripsi; ?></textarea>
                                 </div>
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
 
@@ -84,5 +84,9 @@
 
 </body>
 <script src="<?php echo base_url(); ?>assetadmin/js/dataTables.bootstrap.js"></script>
-
+<script>
+    $(document).ready(function() {
+        CKEDITOR.replace('editor1');
+    });
+</script>
 </html>

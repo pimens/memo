@@ -14,7 +14,7 @@
                             <div class="widget">
                                 <?php echo form_open_multipart("Ad/reject"); ?>
                                 <div class="form-group">
-                                    <textarea name="komentar" id="komentar" class="form-control" rows="3" required="required">Komentar</textarea>
+                                    <textarea name="komentar" id="editor1" class="form-control" rows="3" required="required">Komentar</textarea>
                                 </div>
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
                                 <input type="hidden" value="33" name="status" />
@@ -158,45 +158,8 @@
     });
 </script>
 <script>
-    function hapus(id) {
-        swal({
-                title: 'Konfirmasi?',
-                text: "Apakah anda yakin ingin menghapus data ini!",
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya',
-                closeOnConfirm: true
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        url: "<?php echo site_url('Ad/deleteMemo') ?>/" + id,
-                        type: "POST",
-                        dataType: "JSON",
-                        success: function(data) {
-                            if (data.status) //if success close modal and reload ajax table
-                            {
-
-                                swal({
-                                    title: "Data Berhasil dihapus",
-                                    type: "success",
-                                });
-                                window.location.reload();
-                            }
-
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            alert('Error adding / update data');
-                        }
-                    });
-                }
-            });
-    }
-</script>
-<script>
     $(document).ready(function() {
+        CKEDITOR.replace('editor1');
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);

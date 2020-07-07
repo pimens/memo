@@ -37,7 +37,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                <select name="jenis" id="input" class="form-control">
+                                    <select name="jenis" id="input" class="form-control">
                                         <option value='0'>-- Jenis Memo --</option>
                                         <option value='0'>Memo</option>
                                         <option value='1'>Barang</option>
@@ -50,8 +50,9 @@
                                 <div class="form-group">
                                     <textarea name="hal" class="form-control" rows="3" required="required"></textarea>
                                 </div>
+
                                 <div class="form-group">
-                                    <textarea name="deskripsi" id="inputdeskripsi" class="form-control" rows="3" required="required"></textarea>
+                                    <textarea name="deskripsi" id="editor1" class="form-control" rows="3" required="required"></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
@@ -302,8 +303,12 @@
             });
     }
 </script>
+
 <script>
     $(document).ready(function() {
+        CKEDITOR.replace('editor1');
+
+        // $(".textarea").wysihtml5();
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);

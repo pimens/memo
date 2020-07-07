@@ -14,14 +14,15 @@
                             <div class="widget">
                                 <?php echo form_open_multipart("Ad/reject"); ?>
                                 <div class="form-group">
-                                    <textarea name="komentar" id="komentar" class="form-control" rows="3" required="required">Komentar</textarea>
+                                    <textarea name="komentar" id="editor1" class="form-control" rows="3" required="required">Komentar</textarea>
                                 </div>
                                 <input type="hidden" value="3" name="status" />
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                                <button id="closeAdd" class="btn btn-default">close</button>
                                 <?php echo form_close(); ?>
+                                <button id="closeAdd" class="btn btn-default">close</button>
+
                             </div> <!-- widget end -->
                         </div> <!-- sidebar end -->
                     </div> <!-- kolom 8 end -->
@@ -198,6 +199,7 @@
 </script>
 <script>
     $(document).ready(function() {
+        CKEDITOR.replace('editor1');
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);

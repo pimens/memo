@@ -14,7 +14,7 @@
                             <div class="widget">
                                 <?php echo form_open_multipart("Ad/reject"); ?>
                                 <div class="form-group">
-                                    <textarea name="komentar" id="komentar" class="form-control" rows="3" required="required">Komentar</textarea>
+                                    <textarea name="komentar" id="editor1" class="form-control" rows="3" required="required">Komentar</textarea>
                                 </div>
                                 <input type="hidden" value="3" name="status" />
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
@@ -199,6 +199,7 @@
 </script>
 <script>
     $(document).ready(function() {
+        CKEDITOR.replace('editor1');
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);

@@ -16,17 +16,21 @@
                                     <input value="<?php echo $barang->nama_barang; ?>" type="text" name='nama' class="form-control" placeholder="Enter Desa">
                                 </div>
                                 <div class="form-group">
-                                    <input value="<?php echo $barang->unit; ?>" type="text" name='unit' class="form-control" placeholder="Enter Setoran">
+                                    <input id="y" value="<?php echo $barang->unit; ?>" type="text" name='unit' class="form-control" placeholder="Enter Setoran">
                                 </div>
                                 <div class="form-group">
-                                    <input value="<?php echo $barang->harga; ?>" type="text" name='harga' class="form-control" placeholder="Enter Fee">
+                                    <input id="x" value="<?php echo $barang->harga; ?>" type="text" name='harga' class="form-control" placeholder="Enter Fee">
                                 </div>
                                 <div class="form-group">
                                     <input value="<?php echo $barang->satuan; ?>" type="text" name='total' class="form-control" placeholder="Enter Nomor Rekening">
                                 </div>
                                 <div class="form-group">
-                                    <input value="<?php echo $barang->keterangan; ?>" type="text" name='keterangan' class="form-control" placeholder="Enter Nama Bendahara">
+                                    <input id="z" value="<?php echo $barang->unit*$barang->harga; ?>" type="text" class="form-control" placeholder="Total" required="required" disabled>
                                 </div>
+                                <div class="form-group">
+                                    <textarea name="keterangan" id="editor1" class="form-control" rows="3" required="required"><?php echo $barang->keterangan; ?></textarea>
+                                </div>
+    
                                 <input type="hidden" value="<?php echo $barang->id; ?>" name="id" />
                                 <input type="hidden" value="<?php echo $barang->permohonan; ?>" name="permohonan" />
 
@@ -49,5 +53,20 @@
 
 </body>
 <script src="<?php echo base_url(); ?>assetadmin/js/dataTables.bootstrap.js"></script>
+<script>
+    $(document).ready(function() {
+        CKEDITOR.replace('editor1');
+        $("#x").change(function() {
+            var x = $("#x").val();
+            var y = $("#y").val();
 
+            $("#z").val(x * y);
+        });
+        $("#y").change(function() {
+            var x = $("#x").val();
+            var y = $("#y").val();
+            $("#z").val(x * y);
+        });
+    });
+</script>
 </html>

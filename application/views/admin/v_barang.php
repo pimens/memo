@@ -17,16 +17,19 @@
                                     <input type="text" name='nama' class="form-control" placeholder="Enter nama barang" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name='unit' class="form-control" placeholder="Enter Jumlah" required="required">
+                                    <input id="x" type="text" name='unit' class="form-control" placeholder="Enter Jumlah" required="required">
                                 </div>
                                 <div class="form-group">
                                     <input type="text" name='total' class="form-control" placeholder="Enter Satuan" required="required">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name='harga' class="form-control" placeholder="Enter harga">
+                                    <input id="y" type="text" name='harga' class="form-control" placeholder="Enter harga">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea>
+                                    <input id="z" type="text" class="form-control" placeholder="Total" required="required" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <textarea ID="editor1" name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea>
                                 </div>
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
                                 <button type="submit" class="btn btn-danger">Submit</button>
@@ -126,8 +129,8 @@
                                             $total = 0;
                                             foreach ($barang as $c) {
                                                 $i++;
-                                                $j=0;
-                                                $j=$c->unit*$c->harga;
+                                                $j = 0;
+                                                $j = $c->unit * $c->harga;
                                                 $total = $total + $j;
                                                 echo "<tr>
                                             <td>$i</td>										
@@ -181,6 +184,7 @@
 <script type="text/javascript">
     $(function() {
         $('#tabelMemo').dataTable();
+
     });
 </script>
 <script>
@@ -223,12 +227,24 @@
 </script>
 <script>
     $(document).ready(function() {
+        CKEDITOR.replace('editor1');
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);
         });
         $("#closeAdd").click(function() {
             $("#add").hide(1000);
+        });
+        $("#x").change(function() {
+            var x = $("#x").val();
+            var y = $("#y").val();
+
+            $("#z").val(x * y);
+        });
+        $("#y").change(function() {
+            var x = $("#x").val();
+            var y = $("#y").val();
+            $("#z").val(x * y);
         });
     });
 </script>
