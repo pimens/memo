@@ -14,6 +14,12 @@
                                     <input value="<?php echo $user->nama; ?>" type="text" name='nama' class="form-control" placeholder="Enter Nama">
                                 </div>
                                 <div class="form-group">
+                                    <input value="<?php echo $user->email; ?>" type="text" name='email' class="form-control" placeholder="Enter Email">
+                                </div>
+                                <div class="form-group">
+                                    <input value="<?php echo $user->lokasi; ?>" type="text" name='lokasi' class="form-control" placeholder="Enter Lokasi">
+                                </div>
+                                <div class="form-group">
                                     <input value="<?php echo $user->jabatan; ?>" type="text" name='jabatan' class="form-control" placeholder="Enter Jabatan">
                                 </div>
                                 <div class="form-group">

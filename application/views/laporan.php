@@ -1,82 +1,173 @@
-<?php
-    $u = base_url();
-    $tabel = '
-    <img src="'.$u.'data/bismillah.jpg"></img>
-    <br>
-    <table border="1">
-          <tr>
-                <th> <b>Provinsi</b> </th>
-                <th> <b>Jumlah Penduduk</b> </th>
-          </tr>
+<!DOCTYPE html>
+<html lang="en">
 
-          <tr>
-                <td> Aceh </td>
-                <td> 5.189.500 </td>
-          </tr>
-          <tr>
-                <td> Bali </td>
-                <td> 4.246.500 </td>
-          </tr>
-          <tr>
-                <td> Banten </td>
-                <td> 12.448.200 </td>
-          </tr>
-          <tr>
-                <td> Bengkulu </td>
-                <td> 1.934.300 </td>
-          </tr>
-          <tr>
-                <td> DI Yogyakarta </td>
-                <td> 3.762.200 </td>
-          </tr>
-          <tr>
-                <td> DKI Jakarta </td>
-                <td> 10.374.200 </td>
-          </tr>
-          <tr>
-                <td> Gorontalo </td>
-                <td> 1.168.200 </td>
-          </tr>
-          <tr>
-                <td> Jambi </td>
-                <td> 3.515.000 </td>
-          </tr>
-          <tr>
-                <td> Jawa Barat </td>
-                <td> 48.037.600 </td>
-          </tr>
-          <tr>
-                <td> Jawa Tengah </td>
-                <td> 34.257.900 </td>
-          </tr>
-          <tr>
-                <td> Jawa Timur </td>
-                <td> 39.293.000 </td>
-          </tr>
-          <tr>
-                <td> Kalimantan Barat </td>
-                <td> 4.932.500 </td>
-          </tr>
-          <tr>
-                <td> Kalimantan Selatan </td>
-                <td> 4.119.800 </td>
-          </tr>
-          <tr>
-                <td> Kalimantan Tengah </td>
-                <td> 2.605.300 </td>
-          </tr>
-          <tr>
-                <td> Kalimantan Timur </td>
-                <td> 3.575.400 </td>
-          </tr>
-          <tr>
-                <td> Kalimantan Utara </td>
-                <td> 691.100 </td>
-          </tr>
-          <tr>
-                <td> Kepulauan Bangka Belitung </td>
-                <td> 1.430.900 </td>
-          </tr>
-    </table>
-    ';
-    echo $tabel;
+<head>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assetadmin/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    hr.solid {
+        border-top: 3px solid #000;
+    }
+</style>
+
+<body>
+    <div class="row">
+        <div class="col-md-3 col-md-offset-5"><br>
+            <b style="text-align-last: center;">Memo</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+            <hr class="solid">          
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-md-offset-2">
+            <?php
+            $u = base_url();
+            echo "Dari<br>";
+            echo  "<b>" . $permohonan->dari . "</b><br>";
+            echo  $permohonan->fromJabatan . "<br>";
+            echo  $permohonan->fromEmail . "<br>";
+            echo  $permohonan->fromLokasi . "<br>";
+            echo "Status :";
+            if ($permohonan->status == 0) {
+                echo "
+                                    <span class='label label-success'>Pending</span>
+                                    ";
+            } else if ($permohonan->status == 1) {
+                echo "
+                                   <span class='label label-warning'>Approve X</span>
+                                    ";
+            } else if ($permohonan->status == 2) {
+                echo "
+                                    <span class='label label-primary'>Approve XX</span>
+                                    ";
+                echo "<a class='label label-primary' href='$u/ad/reportBarang/$permohonan->id'>Report</a>";
+            } else if ($permohonan->status == 3) {
+                echo "
+                                    <span class='label label-danger'>Rejected X</span>
+                                    ";
+            } else {
+                echo "
+                                    <span class='label label-danger'>Rejected XX</span>
+                                    ";
+            }
+            ?>
+
+        </div> <!-- kolom 6 end -->
+        <div class="col-md-3">
+            <?php
+            $u = base_url();
+            echo "Kepada<br>";
+            echo  "<b>" . $permohonan->kepada . "</b><br>";
+            echo  $permohonan->toJabatan . "<br>";
+            echo  $permohonan->toEmail . "<br>";
+            echo  $permohonan->toLokasi . "<br>";
+
+
+            echo "Status :";
+            if ($permohonan->status == 0) {
+                echo "
+                                    <span class='label label-success'>Pending</span>
+                                    ";
+            } else if ($permohonan->status == 1) {
+                echo "
+                                   <span class='label label-warning'>Approve X</span>
+                                    ";
+            } else if ($permohonan->status == 2) {
+                echo "
+                                    <span class='label label-primary'>Approve XX</span>
+                                    ";
+                echo "<a class='label label-primary' href='$u/ad/reportBarang/$permohonan->id'>Report</a>";
+            } else if ($permohonan->status == 3) {
+                echo "
+                                    <span class='label label-danger'>Rejected X</span>
+                                    ";
+            } else {
+                echo "
+                                    <span class='label label-danger'>Rejected XX</span>
+                                    ";
+            }
+            ?>
+        </div> <!-- kolom 6 end -->
+        <div class="col-md-3">
+            <?php
+            $u = base_url();
+            echo "E-Document # " . $permohonan->nomor . "<br><br>";
+            echo "Perihal :" . $permohonan->hal . "<br>";
+            echo "tanggal :" . $permohonan->tanggal . "<br>";
+            ?>
+
+        </div> <!-- kolom 6 end -->
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+            <hr class="solid">          
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-4">
+            <?php
+            $u = base_url();
+            echo '<img src="' . $u . 'data/bismillah.jpg"></img><br>';
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9 col-md-offset-2">
+            <hr class="solid">          
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            
+            <?php
+            // $u = base_url();
+            // echo '<img src="' . $u . 'data/garis.png"></img><br>';
+            ?>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            Dengan ini meyatakan bahwa bla bla
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Desa</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>iman</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>iman</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>No.</th>
+                        <th>Desa</th>
+
+                    </tr>
+                </tfoot>
+            </table>
+            Demikian perihal ini terimakasih
+        </div>
+    </div>
+</body>
+
+</html>

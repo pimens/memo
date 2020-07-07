@@ -41,7 +41,7 @@
                                             <?php
                                             $u = base_url();
                                             foreach ($permohonan as $c) {
-                                                if($c->jenis==1){
+                                                if ($c->jenis == 1) {
                                                     continue;
                                                 }
                                                 echo "<tr>";
@@ -51,11 +51,11 @@
                                                 ";
                                                 } else if ($c->status == 1) {
                                                     echo "
-                                                <td><p><span class='label label-warning'>Approve X</span></p></td>
+                                                <td><p><span class='label label-warning'>Approve X</span></p><br>$c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 2) {
                                                     echo "
-                                                <td><p><span class='label label-primary'>Approve XX</span></p></td>
+                                                <td><p><span class='label label-primary'>Approve XX</span></p><br>$c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 3) {
                                                     echo "
@@ -81,7 +81,7 @@
                                                     "ad/detailMemo2/$c->id'><i class='fa fa-eye'></i></a>";
                                                 if ($c->status == 1) {
                                                     echo "<a class='btn btn-success btn-circle btn-sm btn-outline' href='" . $u
-                                                        . "ad/approve/$c->id/2'><i class='fa fa-check-square-o'></i></a>";
+                                                        . "ad/detailMemo2/$c->id'><i class='fa fa-check-square-o'></i></a>";
                                                     echo "<a class='btn btn-danger btn-circle btn-sm btn-outline' href='" . $u
                                                         . "ad/detailMemo2/$c->id'><i class='fa fa-minus-square'></i></a>";
                                                 } else if ($c->status == 2 || $c->status == 33) {
@@ -144,7 +144,7 @@
                                             <?php
                                             $u = base_url();
                                             foreach ($permohonan as $c) {
-                                                if($c->jenis==0){
+                                                if ($c->jenis == 0) {
                                                     continue;
                                                 }
                                                 echo "<tr>";
@@ -154,11 +154,13 @@
                                                 ";
                                                 } else if ($c->status == 1) {
                                                     echo "
-                                                <td><p><span class='label label-warning'>Approve X</span></p></td>
+                                                <td><p><span class='label label-warning'>Approve X</span></p><br>$c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 2) {
                                                     echo "
-                                                <td><p><span class='label label-primary'>Approve XX</span></p></td>
+                                                <td><p><span class='label label-primary'>Approve XX</span></p>
+                                                <br>$c->komentar
+                                                </td>
                                                 ";
                                                 } else if ($c->status == 3) {
                                                     echo "
@@ -184,7 +186,7 @@
                                                     "ad/detailBarang2/$c->id'><i class='fa fa-eye'></i></a>";
                                                 if ($c->status == 1) {
                                                     echo "<a class='btn btn-success btn-circle btn-sm btn-outline' href='" . $u
-                                                        . "ad/approve/$c->id/2'><i class='fa fa-check-square-o'></i></a>";
+                                                        . "ad/detailBarang2/$c->id'><i class='fa fa-check-square-o'></i></a>";
                                                     echo "<a class='btn btn-danger btn-circle btn-sm btn-outline' href='" . $u
                                                         . "ad/detailBarang2/$c->id'><i class='fa fa-minus-square'></i></a>";
                                                 } else if ($c->status == 2 || $c->status == 33) {

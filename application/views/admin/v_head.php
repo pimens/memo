@@ -14,8 +14,6 @@
 
     <!-- <script src="<?php echo base_url(); ?>asset/js/ckeditorku.js"></script> -->
     <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-
-    
     <script src="<?php echo base_url(); ?>assetadmin/js/jQuery-2.1.4.min.js"></script>
 
     <script src="<?php echo base_url(); ?>assetadmin/js/bootstrap.min.js"></script>

@@ -29,14 +29,14 @@
                                     <input id="z" type="text" class="form-control" placeholder="Total" required="required" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <textarea ID="editor1" name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea>
+                                <!-- <textarea ID="editor1" name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea> -->
+                                    <textarea name="keterangan" class="form-control" rows="3" required="required">keterangan</textarea>
                                 </div>
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                                <button id="closeAdd" class="btn btn-warning">close</button>
                                 <?php echo form_close(); ?>
-
+                                <button id="closeAdd" class="btn btn-warning">close</button>
                             </div> <!-- widget end -->
                         </div> <!-- sidebar end -->
                     </div> <!-- kolom 8 end -->
@@ -227,7 +227,7 @@
 </script>
 <script>
     $(document).ready(function() {
-        CKEDITOR.replace('editor1');
+        // CKEDITOR.replace('editor1');
         $("#add").hide(1000);
         $("#addButton").click(function() {
             $("#add").show(1000);

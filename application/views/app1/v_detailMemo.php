@@ -18,10 +18,27 @@
                                 </div>
                                 <input type="hidden" value="3" name="status" />
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
-                                <button type="submit" class="btn btn-danger">Submit</button>
+                                <button type="submit" class="btn btn-danger">Reject</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
                                 <?php echo form_close(); ?>
                                 <button id="closeAdd" class="btn btn-default">close</button>
+
+                            </div> <!-- widget end -->
+                        </div> <!-- sidebar end -->
+                    </div> <!-- kolom 8 end -->
+                    <div id="apr" class="col-md-6 col-md-offset-3">
+                        <div class="sidebar">
+                            <div class="widget">
+                                <?php echo form_open_multipart("Ad/reject"); ?>
+                                <div class="form-group">
+                                    <textarea name="komentar" id="editor2" class="form-control" rows="3" required="required">Komentar</textarea>
+                                </div>
+                                <input type="hidden" value="1" name="status" />
+                                <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
+                                <button type="submit" class="btn btn-primary">Approve</button>
+                                <button type="reset" class="btn btn-default">Reset</button>
+                                <?php echo form_close(); ?>
+                                <button id="closeApr" class="btn btn-default">close</button>
 
                             </div> <!-- widget end -->
                         </div> <!-- sidebar end -->
@@ -52,7 +69,7 @@
                                     echo "
                                     <span class='label label-success'>Pending</span>
                                     <br><br>
-                                    <a href='" . $u . "ad/approve/$permohonan->id/1' class='btn btn-primary btn-sm'>Approve</a>
+                                    <a id='aprButton' type='submit' class='btn btn-primary btn-sm'>Approve</a>
                                     <a id='addButton' type='submit' class='btn btn-danger btn-sm'>Rejected</a>
                                     ";
                                 } else if ($permohonan->status == 1) {
@@ -63,7 +80,7 @@
                                     echo "
                                     <span class='label label-primary'>Approve XX</span>
                                     ";
-                                     echo "<a class='label label-primary' href='$u/ad/report/$permohonan->id'>Report</a>";
+                                    echo "<a class='label label-primary' href='$u/ad/report/$permohonan->id'>Report</a>";
                                 } else if ($permohonan->status == 3) {
                                     echo "
                                     <span class='label label-danger'>Rejected X</span>
@@ -200,12 +217,22 @@
 <script>
     $(document).ready(function() {
         CKEDITOR.replace('editor1');
+        CKEDITOR.replace('editor2');
+
         $("#add").hide(1000);
+        $("#apr").hide(1000);
+
         $("#addButton").click(function() {
             $("#add").show(1000);
         });
         $("#closeAdd").click(function() {
             $("#add").hide(1000);
+        });
+        $("#aprButton").click(function() {
+            $("#apr").show(1000);
+        });
+        $("#closeApr").click(function() {
+            $("#apr").hide(1000);
         });
     });
 </script>

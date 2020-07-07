@@ -325,6 +325,8 @@ class Ad extends CI_Controller
 		$data['nama'] = $this->input->post('nama');
 		$data['jabatan'] = $this->input->post('jabatan');
 		$data['password'] = $this->input->post('password');
+		$data['email'] = $this->input->post('email');
+		$data['lokasi'] = $this->input->post('lokasi');
 		$data['lama'] = $this->input->post('lama');
 		$this->M_ad->editUser($data);
 		$this->session->set_flashdata('notif', '<div id="success-alert" class="alert alert-success alert-dismissable">
@@ -407,14 +409,16 @@ class Ad extends CI_Controller
 		$total = 0;
 		$this->load->helper('csv');
 		foreach ($q as $row) {
-			$j=0;
-			$j=$row->unit*$row->harga;
+			$j = 0;
+			$j = $row->unit * $row->harga;
 			$total = $total + $j;
-			$data[++$i] = array('', '', '', $in, $row->nama_barang, $row->unit, $row->harga, 
-			$j, $row->keterangan);
+			$data[++$i] = array(
+				'', '', '', $in, $row->nama_barang, $row->unit, $row->harga,
+				$j, $row->keterangan
+			);
 			$in++;
 		}
-		$data[++$i] = array('', '', '', '','', 'Total', $total);
+		$data[++$i] = array('', '', '', '', '', 'Total', $total);
 		echo array_to_csv($header);
 		echo array_to_csv($data, 'ReportBarang-' . $d['permohonan']->nomor . '.csv');
 		die();
@@ -455,101 +459,325 @@ class Ad extends CI_Controller
 		die();
 	}
 	//===pdf
-	public function viewReport()
+	public function viewReport($id)
 	{
-		$this->load->view('lap');
+		$d['permohonan'] = $this->M_ad->getPermohonanByIdLaporan($id);
+		$this->load->view('laporan', $d);
 	}
-	public function pdf()
-    {
+	public function pdf($id)
+	{
+		$d = $this->M_ad->getPermohonanByIdLaporan($id);
+		$barang =  $this->M_ad->getTabelBarang($id);
+		$data['title'] = 'Tabel Memo';
 		$this->load->library('pdf');
-        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        $pdf->setPrintFooter(false);
-        $pdf->setPrintHeader(false);
-        $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
-        $pdf->AddPage('');
-        $pdf->Write(0, 'Simpan ke PDF', '', 0, 'L', true, 0, false, false, 0);
-        $pdf->SetFont('');
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$pdf->setPrintFooter(false);
+		$pdf->setPrintHeader(false);
+		$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+		$pdf->AddPage('');
+		// $pdf->Write(0, 'Simpan ke PDF', '', 0, 'L', true, 0, false, false, 0);
+		$pdf->SetFont('');
 		$u = base_url();
+		$font_size = $pdf->pixelsToUnits('30');
+
+		$pdf->SetFont('helvetica', '', $font_size, '', 'default', true);
 		$tabel = '
-		<img src="'.$u.'data/bismillah.jpg"></img>
-		<br>
-        <table border="1">
-              <tr>
-                    <th> <b>Provinsi</b> </th>
-                    <th> <b>Jumlah Penduduk</b> </th>
-              </tr>
- 
-              <tr>
-                    <td> Aceh </td>
-                    <td> 5.189.500 </td>
-              </tr>
-              <tr>
-                    <td> Bali </td>
-                    <td> 4.246.500 </td>
-              </tr>
-              <tr>
-                    <td> Banten </td>
-                    <td> 12.448.200 </td>
-              </tr>
-              <tr>
-                    <td> Bengkulu </td>
-                    <td> 1.934.300 </td>
-              </tr>
-              <tr>
-                    <td> DI Yogyakarta </td>
-                    <td> 3.762.200 </td>
-              </tr>
-              <tr>
-                    <td> DKI Jakarta </td>
-                    <td> 10.374.200 </td>
-              </tr>
-              <tr>
-                    <td> Gorontalo </td>
-                    <td> 1.168.200 </td>
-              </tr>
-              <tr>
-                    <td> Jambi </td>
-                    <td> 3.515.000 </td>
-              </tr>
-              <tr>
-                    <td> Jawa Barat </td>
-                    <td> 48.037.600 </td>
-              </tr>
-              <tr>
-                    <td> Jawa Tengah </td>
-                    <td> 34.257.900 </td>
-              </tr>
-              <tr>
-                    <td> Jawa Timur </td>
-                    <td> 39.293.000 </td>
-              </tr>
-              <tr>
-                    <td> Kalimantan Barat </td>
-                    <td> 4.932.500 </td>
-              </tr>
-              <tr>
-                    <td> Kalimantan Selatan </td>
-                    <td> 4.119.800 </td>
-              </tr>
-              <tr>
-                    <td> Kalimantan Tengah </td>
-                    <td> 2.605.300 </td>
-              </tr>
-              <tr>
-                    <td> Kalimantan Timur </td>
-                    <td> 3.575.400 </td>
-              </tr>
-              <tr>
-                    <td> Kalimantan Utara </td>
-                    <td> 691.100 </td>
-              </tr>
-              <tr>
-                    <td> Kepulauan Bangka Belitung </td>
-                    <td> 1.430.900 </td>
-              </tr>
-        </table>
-        ';
-        $pdf->writeHTML($tabel);
-        $pdf->Output('report', 'I');
-    }
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<b>Memo</b><br>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		<table>
+			<tr>
+				<td width="150" align="left" >
+					Dari
+					
+				</td>
+				<td width="150" align="left" >
+					Kepada
+				</td>
+				<td width="250" align="left" >
+					Nomor : ' . $d->nomor . '
+				</td>		
+			</tr>
+
+			<tr>
+				<td width="150" align="left" >
+					<b>' . $d->dari . '</b>
+				</td>
+				<td width="150" align="left" >
+					<b>' . $d->kepada . '</b>
+				</td>
+				<td width="250" align="left" >
+				</td>		
+			</tr>
+			
+
+
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromJabatan . '
+					
+				</td>
+				<td width="150" align="left" >
+				' . $d->toJabatan . '
+
+				</td>
+				<td width="250" align="left" >
+					Perihal : ' . $d->hal . '
+				</td>		
+			</tr>
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromEmail . '
+				</td>
+				<td width="150" align="left" >
+					' . $d->toEmail . '
+				</td>
+				<td width="250" align="left" >
+					Tanggal : ' . $d->tanggal . '
+				</td>		
+			</tr>
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromLokasi . '
+				</td>
+				<td width="150" align="left" >
+					' . $d->toLokasi . '
+				</td>
+				<td width="250" align="left" >
+				</td>		
+			</tr>
+		 </table><br><br>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		<table>
+			<tr>
+				<td align="center">
+					<span><img src="' . $u . 'data/bismillah.jpg"></img><br>
+				</td>
+			</tr>
+		</table>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		
+		Dengan ini menyatakan
+
+		<br><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<table border="1">
+		<tr>
+			<td align="center" width="35"> No.</td>
+			<td align="center" width="100"> Nama Barang</td>
+			<td align="center" width="50"> Unit</td>
+			<td align="center" width="50"> Harga</td>
+			<td align="center" width="60"> Total</td>
+			<td align="center" width="150"> Keterangan</td>
+		</tr>';
+		$tt = '</table><br><br>
+
+		Demikian surat ini
+
+		<br><br>
+		<table>
+		<tr>
+			<td width="150" align="center" >
+				Direktur				
+			</td>
+			<td width="150" align="left" >
+				
+			</td>
+			<td width="180" align="center" >
+				Pemohon
+			</td>		
+		</tr>
+		</table>
+		';
+		$i = 0;
+		$total = 0;
+		foreach ($barang as $c) {
+			$i++;
+			$j = 0;
+			$j = $c->unit * $c->harga;
+			$total = $total + $j;
+			$tabel=$tabel.'<tr>
+				<td align="center">';
+			$tabel=$tabel."$i</td>										
+				<td> $c->nama_barang</td>										
+				<td> $c->unit/$c->satuan</td>			
+				<td> $c->harga</td>		
+				<td> $j</td>		
+				<td> $c->keterangan</td>
+			</tr>";
+		}
+		$tabel = $tabel.'
+			<tr>
+				<td colspan="4" align="center">Total</td>
+				<td> '.$total.'</td>
+			</tr>
+		';
+		header("Content-type: application/pdf");
+		$tabel = $tabel.$tt;
+		$pdf->writeHTML($tabel);
+		$x =  $pdf->Output('report100.pdf', 'S');
+		echo $x;
+	}
+	public function pdfMemo($id)
+	{
+		$d = $this->M_ad->getPermohonanByIdLaporan($id);
+		$memo =  $this->M_ad->getTabelMemo($id);
+		$this->load->library('pdf');
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$pdf->setPrintFooter(false);
+		$pdf->setPrintHeader(false);
+		$pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
+		$pdf->AddPage('');
+		$u = base_url();
+		$font_size = $pdf->pixelsToUnits('30');
+
+		$pdf->SetFont('helvetica', '', $font_size, '', 'default', true);
+		$tabel = '
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<b>Memo</b><br>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		<table>
+			<tr>
+				<td width="150" align="left" >
+					Dari
+					
+				</td>
+				<td width="150" align="left" >
+					Kepada
+				</td>
+				<td width="250" align="left" >
+					Nomor : ' . $d->nomor . '
+				</td>		
+			</tr>
+
+			<tr>
+				<td width="150" align="left" >
+					<b>' . $d->dari . '</b>
+				</td>
+				<td width="150" align="left" >
+					<b>' . $d->kepada . '</b>
+				</td>
+				<td width="250" align="left">
+				</td>		
+			</tr>
+			
+
+
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromJabatan . '
+					
+				</td>
+				<td width="150" align="left" >
+				' . $d->toJabatan . '
+
+				</td>
+				<td width="250" align="left" >
+					Perihal : ' . $d->hal . '
+				</td>		
+			</tr>
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromEmail . '
+				</td>
+				<td width="150" align="left" >
+					' . $d->toEmail . '
+				</td>
+				<td width="250" align="left" >
+					Tanggal : ' . $d->tanggal . '
+				</td>		
+			</tr>
+			<tr>
+				<td width="150" align="left" >
+					' . $d->fromLokasi . '
+				</td>
+				<td width="150" align="left" >
+					' . $d->toLokasi . '
+				</td>
+				<td width="250" align="left" >
+				</td>		
+			</tr>
+		 </table><br><br>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		<table>
+			<tr>
+				<td align="center">
+					<span><img src="' . $u . 'data/bismillah.jpg"></img><br>
+				</td>
+			</tr>
+		</table>
+		<img src="' . $u . 'data/garis.png"></img><br>
+		
+		Dengan ini menyatakan
+
+		<br><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<table border="1">
+		<tr>
+			<td align="center" width="35"> No.</td>
+			<td align="center" width="100">Desa</td>
+			<td align="center" width="70"> Setoran (Rp.)</td>
+			<td align="center" width="70"> Fee (Rp.)</td>
+			<td align="center" width="120"> Nomor Rekening</td>
+			<td align="center" width="100"> Bendahara</td>
+		</tr>';
+		$tt = '</table><br><br>
+		
+		Demikian surat ini
+
+		<br><br>
+		<table>
+		<tr>
+			<td width="150" align="center" >
+				Direktur				
+			</td>
+			<td width="150" align="left" >
+				
+			</td>
+			<td width="180" align="center" >
+				Pemohon
+			</td>		
+		</tr>
+		</table>
+		';
+		$i = 0;
+		$total = 0;
+		$totalfee=0;
+		foreach ($memo as $c) {
+			$i++;
+			$total = $total + $c->setoran;
+			$totalfee=$totalfee+$c->fee;
+			$tabel=$tabel.'<tr>
+				<td align="center">';
+			$tabel=$tabel."$i</td>										
+				<td> $c->desa</td>										
+				<td> $c->setoran</td>			
+				<td> $c->fee</td>		
+				<td> $c->norekening</td>		
+				<td> $c->bendahara</td>		
+			</tr>";
+		}
+		$tabel = $tabel.'
+			<tr>
+				<td colspan="2" align="center">Total</td>
+				<td> '.$total.'</td>
+				<td> '.$totalfee.'</td>
+			</tr>
+		';
+		header("Content-type: application/pdf");
+		$tabel = $tabel.$tt;
+		$pdf->writeHTML($tabel);
+		$x =  $pdf->Output('report100.pdf', 'S');
+		echo $x;
+	}
 }

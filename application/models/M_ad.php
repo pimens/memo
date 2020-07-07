@@ -70,6 +70,16 @@ class M_ad extends CI_model
 		where permohonan.id=$id and user.id=permohonan.kepada and dd.id=permohonan.direktur
 		and d.id=permohonan.dari")->row();
 	}
+	public function getPermohonanByIdLaporan($id)
+	{
+		return $this->db->query("select d.lokasi as fromLokasi,user.lokasi as toLokasi,
+		d.email as fromEmail, user.email as toEmail,
+		d.jabatan as fromJabatan,user.jabatan as toJabatan,jenis,permohonan.kepada as kpd,permohonan.direktur as dir,d.nama as dari,
+		dd.nama as direktur,status,permohonan.id as id,nomor,user.nama as kepada,hal,tanggal,
+		deskripsi from permohonan,user,(select * from user) as d,(select * from user) as dd
+		where permohonan.id=$id and user.id=permohonan.kepada and dd.id=permohonan.direktur
+		and d.id=permohonan.dari")->row();
+	}
 	public function deletePermohonan($id)
 	{
 		return $this->db->query("delete from permohonan where id=$id");
@@ -195,11 +205,13 @@ class M_ad extends CI_model
 		$jb = $data['jabatan'];
 		$l = $data['level'];
 		return $this->db->query("insert into user
-		 values ('','$n','$jb','$l','$p')");
+		 values ('','$n','','','$jb','$l','$p')");
 	}
 	function editUser($data)
 	{
 		$n = $data['nama'];
+		$e = $data['email'];
+		$lok = $data['lokasi'];
 		$jb = $data['jabatan'];
 		$p = md5($data['password']);
 		$l = $data['lama'];
@@ -207,7 +219,7 @@ class M_ad extends CI_model
 			$p = $l;
 		}
 		$id = $this->session->userdata('id');
-		return $this->db->query("update user set nama='$n',jabatan='$jb',password='$p' where id=$id");
+		return $this->db->query("update user set email='$e',lokasi='$lok',nama='$n',jabatan='$jb',password='$p' where id=$id");
 	}
 	public function deleteUser($id)
 	{

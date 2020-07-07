@@ -31,9 +31,8 @@
                                 <input type="hidden" value="<?php echo $permohonan->id; ?>" name="id" />
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
-                                <button id="closeAdd" class="btn btn-warning">close</button>
                                 <?php echo form_close(); ?>
-
+                                <button id="closeAdd" class="btn btn-warning">close</button>
                             </div> <!-- widget end -->
                         </div> <!-- sidebar end -->
                     </div> <!-- kolom 8 end -->

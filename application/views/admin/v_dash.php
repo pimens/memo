@@ -48,11 +48,11 @@
                                     <input type="text" name='tanggal' class="form-control" id="name" placeholder="Enter Tanggal">
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="hal" class="form-control" rows="3" required="required"></textarea>
+                                    <textarea name="hal" class="form-control" rows="3" required="required">Hal</textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea name="deskripsi" id="editor1" class="form-control" rows="3" required="required"></textarea>
+                                    <textarea name="deskripsi" id="editor1" class="form-control" rows="3" required="required">Keterangan</textarea>
                                 </div>
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
@@ -129,6 +129,8 @@
                                             <td>$c->deskripsi</td>		
                                             <td>";
                                                 echo "<a class='btn btn-info btn-sm' href='" . $u . "ad/memo/$c->id'><span class='glyphicon glyphicon-plus'></span></a>";
+                                                echo "<a class='btn btn-info btn-sm' href='" . $u . "ad/pdfMemo/$c->id'><span class='glyphicon glyphicon-report'></span>PDF</a>";
+
                                                 if ($c->status == 0) {
                                                     echo "<a class='btn btn-primary btn-sm' href='$u/ad/editPermohonan/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
                                                     echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
@@ -195,11 +197,11 @@
                                                 ";
                                                 } else if ($c->status == 1) {
                                                     echo "
-                                                <td><p><span class='label label-warning'>Approve X</span></p></td>
+                                                <td><p><span class='label label-warning'>Approve X</span></p>$c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 2) {
                                                     echo "
-                                                <td><p><span class='label label-primary'>Approve XX</span></p></td>
+                                                <td><p><span class='label label-primary'>Approve XX</span></p>$c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 3) {
                                                     echo "
@@ -222,6 +224,8 @@
                                             <td>$c->deskripsi</td>		
                                             <td>";
                                                 echo "<a class='btn btn-info btn-sm' href='" . $u . "ad/barang/$c->id'><span class='glyphicon glyphicon-plus'></span></a>";
+                                                echo "<a class='btn btn-info btn-sm' href='" . $u . "ad/pdf/$c->id'><span class='glyphicon glyphicon-report'></span>PDF</a>";
+
                                                 if ($c->status == 0) {
                                                     echo "<a class='btn btn-primary btn-sm' href='$u/ad/editPermohonan/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
                                                     echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
