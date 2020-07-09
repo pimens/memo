@@ -1,30 +1,62 @@
-<!-- <div id="pd"></div>
+<table>
+    <tr>
+        <td>
+            abc
+        </td>
+        <td>
+            abc
+        </td>
+    </tr>
+    <tr>
+        <td>
+            abc
+        </td>
+        <td>
+            abc
+        </td>
+    </tr>
+</table>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>
-<script>
-    PDFObject.embed("<?php echo base_url(); ?>Ad/pdf", "#pd");
-    if (PDFObject.supportsPDFs) {
-        console.log("Yay, this browser supports inline PDFs.");
-    } else {
-        console.log("Boo, inline PDFs are not supported by this browser");
-    }
-</script>
-
-<h2>PDF --- 1</h2>
-<object data="https://s3.amazonaws.com/dq-blog-files/pandas-cheat-sheet.pdf" type=
-"application/pdf" style="width:100%;height:1200px;">alt : <a href=
-"<?php echo base_url(); ?>data/xx.pdf">example</a></object> -->
-
-
-
-<h2>PDF --- 1</h2>
-
-<!-- <object data="http://localhost/memo/data/xx.pdf" type=
-"application/pdf" style="width:100%;height:1200px;">alt : <a href=
-"<?php echo base_url(); ?>data/xx.pdf">example</a></object> -->
-
-
-<h2>PDF --- 2</h2>
-<object data="<?php echo base_url(); ?>Ad/pdf" type=
-"application/pdf" style="width:100%;height:1200px;">alt : <a href=
-"<?php echo base_url(); ?>data/xx.pdf">example</a></object> 
+<table id="tabelMemo" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Desa</th>
+            <th>Setoran</th>
+            <th>Fee</th>
+            <th>Nomor Rekening</th>
+            <th>Bendahara</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $i = 0;
+        $total = 0;
+        foreach ($memo as $c) {
+            $i++;
+            $total = $total + $c->setoran;
+            echo "<tr>
+                                            <td>$i</td>										
+                                            <td>$c->desa</td>										
+                                        	<td>$c->setoran</td>			
+                                            <td>$c->fee</td>		
+                                            <td>$c->norekening</td>		
+                                            <td>$c->bendahara</td>
+                                            </tr>";
+        }
+        ?>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>No.</th>
+            <th>Desa</th>
+            <th>Setoran</th>
+            <th>Fee</th>
+            <th>Nomor Rekening</th>
+            <th>Bendahara</th>
+        </tr>
+    </tfoot>
+</table>
+<?php
+echo "Total Setoran : " . $total;
+?>

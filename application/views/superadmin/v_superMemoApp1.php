@@ -47,9 +47,9 @@
                                             <?php
                                             foreach ($permohonan as $c) {
                                                 echo "<tr>";
-                                                if($c->jenis==0){
+                                                if ($c->jenis == 0) {
                                                     echo "<td>Memo</td></td>";
-                                                }else{
+                                                } else {
                                                     echo "<td>Barang</td>";
                                                 }
                                                 if ($c->status == 0) {
@@ -58,11 +58,13 @@
                                                 ";
                                                 } else if ($c->status == 1) {
                                                     echo "
-                                                <td><p><span class='label label-warning'>Approve X</span></p></td>
+                                                <td><p><span class='label label-warning'>Approve X</span></p>
+                                                $c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 2) {
                                                     echo "
-                                                <td><p><span class='label label-primary'>Approve XX</span></p></td>
+                                                <td><p><span class='label label-primary'>Approve XX</span></p>
+                                                $c->komentar</td>
                                                 ";
                                                 } else if ($c->status == 3) {
                                                     echo "
@@ -85,14 +87,18 @@
                                             <td>$c->hal</td>		
                                             <td>$c->deskripsi</td>		
                                             <td>";
-                                            if($c->jenis==0){
-                                                echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
-                                                    "ad/detailMemo3/$c->id'><i class='fa fa-eye'></i></a>";
-                                            }else{
-                                                echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
-                                                "ad/detailBarang3/$c->id'><i class='fa fa-eye'></i></a>";
-                                            }
-                                                
+                                                if ($c->jenis == 0) {
+                                                    echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
+                                                        "ad/detailMemo3/$c->id'><i class='fa fa-eye'></i></a>";
+                                                    echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
+                                                        "ad/pdfMemo/$c->id'><i class='fa fa-report'></i>PDF</a>";
+                                                } else {
+                                                    echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
+                                                        "ad/detailBarang3/$c->id'><i class='fa fa-eye'></i></a>";
+                                                    echo "<a class='btn btn-primary btn-circle btn-sm btn-outline' href='" . $u .
+                                                        "ad/pdf/$c->id'><i class='fa fa-report'></i>PDF</a>";
+                                                }
+
                                                 echo "</td>
                                             </tr>";
                                             }

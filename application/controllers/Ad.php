@@ -477,7 +477,7 @@ class Ad extends CI_Controller
 		$u = base_url();
 		$font_size = $pdf->pixelsToUnits('30');
 		$pdf->SetFont('helvetica', '', $font_size, '', 'default', true);
-		$konten="";
+		$konten = "";
 		//ini header
 		$header = '		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -558,10 +558,10 @@ class Ad extends CI_Controller
 			</tr>
 		</table>
 		<img src="' . $u . 'data/garis.png"></img>';
-		
+
 		//ini pembuka
 		//pembuka kalau tanpa tabel bakalan ke replace sama deskripsi
-		$pembuka='Dengan ini menyatakan<br><br>';
+		$pembuka = 'Dengan ini menyatakan<br><br>';
 		//ini tabel
 		$tab = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<table border="1">
@@ -580,9 +580,9 @@ class Ad extends CI_Controller
 			$j = 0;
 			$j = $c->unit * $c->harga;
 			$total = $total + $j;
-			$tab=$tab.'<tr>
+			$tab = $tab . '<tr>
 				<td align="center">';
-			$tab=$tab."$i</td>										
+			$tab = $tab . "$i</td>										
 				<td> $c->nama_barang</td>										
 				<td> $c->unit/$c->satuan</td>			
 				<td> $c->harga</td>		
@@ -590,10 +590,10 @@ class Ad extends CI_Controller
 				<td> $c->keterangan</td>
 			</tr>";
 		}
-		$tab = $tab.'
+		$tab = $tab . '
 			<tr>
 				<td colspan="4" align="center">Total</td>
-				<td> '.$total.'</td>
+				<td> ' . $total . '</td>
 			</tr></table>
 		';
 
@@ -605,7 +605,7 @@ class Ad extends CI_Controller
 		<table>
 		<tr>
 			<td width="150" align="center" >
-				Direktur				
+				' . $d->toJabatan . '				
 			</td>
 			<td width="150" align="left" >
 				
@@ -614,12 +614,25 @@ class Ad extends CI_Controller
 				Pemohon
 			</td>		
 		</tr>
-		</table>';
+		</table><br><br><br><br>
+		<table>
+		<tr>
+			<td width="150" align="center" >
+			' . $d->kepada . '				
+			</td>
+			<td width="150" align="left" >
+				
+			</td>
+			<td width="180" align="center" >
+			' . $d->dari . '				
+			</td>		
+		</tr>
+		</table>	';
 		header("Content-type: application/pdf");
-		if(sizeof($barang)==0){
-			$konten=$header.$d->deskripsi.$penutup;
-		}else{
-			$konten=$header.'<br><br>'.$pembuka.$tab.$penutup;
+		if (sizeof($barang) == 0) {
+			$konten = $header . $d->deskripsi . $penutup;
+		} else {
+			$konten = $header . '<br><br>' . $pembuka . $tab . $penutup;
 		}
 		$pdf->writeHTML($konten);
 		$x =  $pdf->Output('report100.pdf', 'S');
@@ -638,7 +651,7 @@ class Ad extends CI_Controller
 		$u = base_url();
 		$font_size = $pdf->pixelsToUnits('30');
 		$pdf->SetFont('helvetica', '', $font_size, '', 'default', true);
-		$konten="";
+		$konten = "";
 		//ini header
 		$header = '		
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -719,9 +732,9 @@ class Ad extends CI_Controller
 			</tr>
 		</table>
 		<img src="' . $u . 'data/garis.png"></img><br><br>';
-		
+
 		//ini pembuka
-		$pembuka='Dengan ini menyatakan<br><br>';
+		$pembuka = 'Dengan ini menyatakan<br><br>';
 		//ini tabel
 		$tab = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<table border="1">
@@ -735,14 +748,14 @@ class Ad extends CI_Controller
 		</tr>';
 		$i = 0;
 		$total = 0;
-		$totalfee=0;
+		$totalfee = 0;
 		foreach ($memo as $c) {
 			$i++;
 			$total = $total + $c->setoran;
-			$totalfee=$totalfee+$c->fee;
-			$tab=$tab.'<tr>
+			$totalfee = $totalfee + $c->fee;
+			$tab = $tab . '<tr>
 				<td align="center">';
-			$tab=$tab."$i</td>										
+			$tab = $tab . "$i</td>										
 				<td> $c->desa</td>										
 				<td> $c->setoran</td>			
 				<td> $c->fee</td>		
@@ -750,11 +763,11 @@ class Ad extends CI_Controller
 				<td> $c->bendahara</td>		
 			</tr>";
 		}
-		$tab = $tab.'
+		$tab = $tab . '
 			<tr>
 				<td colspan="2" align="center">Total</td>
-				<td> '.$total.'</td>
-				<td> '.$totalfee.'</td>
+				<td> ' . $total . '</td>
+				<td> ' . $totalfee . '</td>
 			</tr>
 			</table>
 		';
@@ -766,7 +779,7 @@ class Ad extends CI_Controller
 		<table>
 		<tr>
 			<td width="150" align="center" >
-				Direktur				
+				' . $d->toJabatan . '				
 			</td>
 			<td width="150" align="left" >
 				
@@ -775,12 +788,25 @@ class Ad extends CI_Controller
 				Pemohon
 			</td>		
 		</tr>
-		</table>';
+		</table><br><br><br><br>
+		<table>
+		<tr>
+			<td width="150" align="center" >
+			' . $d->kepada . '				
+			</td>
+			<td width="150" align="left" >
+				
+			</td>
+			<td width="180" align="center" >
+			' . $d->dari . '				
+			</td>		
+		</tr>
+		</table>	';
 		header("Content-type: application/pdf");
-		if(sizeof($memo)==0){
-			$konten=$header.$d->deskripsi.$penutup;
-		}else{
-			$konten=$header.$pembuka.$tab.$penutup;
+		if (sizeof($memo) == 0) {
+			$konten = $header . $d->deskripsi . $penutup;
+		} else {
+			$konten = $header . $pembuka . $tab . $penutup;
 		}
 		$pdf->writeHTML($konten);
 		$x =  $pdf->Output('report100.pdf', 'S');
