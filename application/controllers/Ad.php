@@ -772,7 +772,7 @@ class Ad extends CI_Controller
 			</table>
 		';
 
-		//ini kata penutup
+		//ini kata penutupp
 		$penutup = '<br><br>		
 		Demikian surat ini
 		<br><br>
