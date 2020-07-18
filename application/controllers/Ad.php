@@ -36,7 +36,7 @@ class Ad extends CI_Controller
 		$this->load->view('admin/routing');
 		$data['nomor'] = $this->input->post('nomor');
 		$data['kepada'] = $this->input->post('kepada');
-		$data['dir'] = $this->input->post('dir');
+		$data['direktur'] = $this->input->post('dir');
 		$data['dari'] = $this->session->userdata('id');
 		$data['tanggal'] = $this->input->post('tanggal');
 		$data['hal'] = $this->input->post('hal');

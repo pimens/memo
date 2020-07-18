@@ -38,16 +38,7 @@ class M_ad extends CI_model
 	}
 	function insertPermohonan($data)
 	{
-		$n = $data['nomor'];
-		$kpd = $data['kepada'];
-		$dr = $data['dari'];
-		$tgl = $data['tanggal'];
-		$dir = $data['dir'];
-		$hal = $data['hal'];
-		$desk = $data['deskripsi'];
-		$jns = $data['jenis'];
-		return $this->db->query("insert into permohonan
-		 values ('','$n','$kpd','$dir','$dr','$tgl','$hal','$desk',0,'',$jns)");
+		return $this->db->insert("permohonan",$data);
 	}
 	function editPermohonan($data)
 	{

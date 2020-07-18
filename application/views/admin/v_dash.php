@@ -56,9 +56,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-danger">Submit</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
+                                <?php echo form_close(); ?>
                                 <button id="closeAdd" class="btn btn-default">close</button>
 
-                                <?php echo form_close(); ?>
                             </div> <!-- widget end -->
                         </div> <!-- sidebar end -->
                     </div> <!-- kolom 8 end -->
@@ -133,8 +133,8 @@
 
                                                 if ($c->status == 0) {
                                                     echo "<a class='btn btn-primary btn-sm' href='$u/ad/editPermohonan/$c->id'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                                    echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
                                                 }
+                                                echo "<a class='btn btn-danger btn-sm' onclick='hapus($c->id)' href='javascript:void(0)'><span class='glyphicon glyphicon-trash'></span></a>";
                                                 echo "</td>
                                             </tr>";
                                             }
